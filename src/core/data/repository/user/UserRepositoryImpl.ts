@@ -5,11 +5,12 @@ import { BaseSource } from "../../source/BaseSource";
 import { IUser } from "../../../domain/entity/user/IUser";
 import { DataSource } from "../../source/DataSource";
 import { DataSourceImpl } from "../../source/DataSourceImpl";
+import { GetUserParams } from "../../../domain/entity/user/GetUserParams";
 
 @injectable()
 export class UserRepositoryImpl implements BaseSource, UserRepository {
   dataSource: DataSource;
-
+  
   constructor(@inject(DataSourceImpl) $dataSource: DataSource) {
     this.dataSource = $dataSource;
   }
@@ -17,8 +18,12 @@ export class UserRepositoryImpl implements BaseSource, UserRepository {
   //
   // ─── USER ───────────────────────────────────────────────────────────────────────
   //
-
+  
   getUserWithCredentials(credentials: ICredentials): Promise<IUser[]> {
     return this.dataSource.getUserWithCredentials(credentials);
+  }
+  
+  getUsers(params:GetUserParams): Promise<IUser[]> {
+    return this.dataSource.getUsers(params)
   }
 }

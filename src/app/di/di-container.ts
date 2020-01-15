@@ -7,6 +7,10 @@ import config from "config";
 import { UserService } from "../api/user/user.service";
 import { UserController } from "../api/user/user.controller";
 import { DataSourceImpl } from "../../core/data/source/DataSourceImpl";
+import { JwtServiceImpl } from "../api/auth/JwtServiceImpl";
+import PassportService from "../api/auth/passport.service";
+import { GetUsersTask } from "../../core/domain/usecase/user/GetUsersTask";
+
 let DIContainer = new Container();
 
 //
@@ -18,7 +22,8 @@ DIContainer.bind<UserController>(UserController).toSelf();
 //
 // ─── SERVICE ────────────────────────────────────────────────────────────────────
 //
-
+DIContainer.bind<PassportService>(PassportService).toSelf();
+DIContainer.bind<JwtServiceImpl>(JwtServiceImpl).toSelf();
 DIContainer.bind<UserService>(UserService).toSelf();
 
 //
@@ -26,7 +31,7 @@ DIContainer.bind<UserService>(UserService).toSelf();
 //
 
 DIContainer.bind<UserRepositoryImpl>(UserRepositoryImpl).toSelf();
-DIContainer.bind<DataSourceImpl>(DataSourceImpl).toSelf()
+DIContainer.bind<DataSourceImpl>(DataSourceImpl).toSelf();
 
 //
 // ─── SOURCE ───────────────────────────────────────────────────────────────────────
@@ -40,6 +45,7 @@ DIContainer.bind<RemoteSource>(RemoteSource).toConstantValue(
 //
 // ─── DOMAIN ─────────────────────────────────────────────────────────────────────
 //
+DIContainer.bind<GetUsersTask>(GetUsersTask).toSelf();
 DIContainer.bind<GetAuthenticationTask>(GetAuthenticationTask).toSelf();
 
 export default DIContainer;

@@ -16,7 +16,8 @@ export class TestUserGenerator {
         name: "test full name",
         password: "test password",
         refNo: "test ref",
-        username:"test username"
+        username:"test username",
+        role:USER_ROLE.PARENT
       }
     ];
   }

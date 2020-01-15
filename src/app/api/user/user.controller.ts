@@ -18,8 +18,14 @@ export class UserController {
     try {
       const { role } = req.query;
       const body: ICredentials = req.body;
-      body.role = this.assignUserRole(role)
+      body.role = this.assignUserRole(role);
       const data = await this.userService.authenticateUser(body);
+      if (data === null) {
+        return res
+          .status(401)
+          .send({ message: "username or password invalid", status: 401 });
+      }
+      data.message = "login successful";
       return res.send({ data, status: 200 });
     } catch (error) {
       console.error(error);

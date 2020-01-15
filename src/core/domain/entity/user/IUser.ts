@@ -1,3 +1,5 @@
+import { USER_ROLE } from "../../../../app/common/constants";
+
 export interface IUser {
   id: number | string;
   refNo: string;
@@ -10,5 +12,6 @@ export interface IUser {
   imageUrl?: string;
   adminDate: string;
   level: string;
-  username:string
+  username: string;
+  role: USER_ROLE;
 }
