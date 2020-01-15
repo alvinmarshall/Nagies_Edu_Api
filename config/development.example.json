@@ -1,0 +1,38 @@
+{
+    "name": "Server Development",
+    "version": "",
+    "about": {
+      "company": "",
+      "aboutUrl": "",
+      "contactUrl": ""
+    },
+    "ASSET_DIR": "public",
+    "homeUrl":"http://localhost",
+    "mysqlConfig": {
+      "host": "localhost",
+      "database": "",
+      "user": "root",
+      "password": "",
+      "connectionLimit":100
+    },
+    "port": 3000,
+    "jwtConfig": {
+      "secret": "secret"
+    },
+    "serviceKey": {
+      "type": "t",
+      "project_id": "",
+      "private_key_id": "",
+      "private_key": "",
+      "client_email": "f",
+      "client_id": "",
+      "auth_uri": "",
+      "token_uri": "",
+      "auth_provider_x509_cert_url": "",
+      "client_x509_cert_url": ""
+    },
+    "databaseUrl": {
+      "url": ""
+    }
+  }
+  
