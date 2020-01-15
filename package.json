@@ -5,10 +5,10 @@
   "author": "Kelvin Birikorang",
   "license": "MIT",
   "scripts": {
-    "deploy":"rimraf dist && tsc",
-    "dev":"ts-node ./src/index.ts",
-    "test:unit":"mocha --opts ./unit_test/mocha.opts -r ts-node/register --exit",
-    "test:integration":"set NODE_ENV=test&& nyc --reporter=html --reporters=text mocha --opts ./integration.opts -r ts-node/register --exit"
+    "deploy": "rimraf dist && tsc",
+    "dev": "set NODE_ENV=development&& ts-node ./src/index.ts",
+    "test:unit": "mocha --opts ./unit_test/mocha.opts -r ts-node/register --exit",
+    "test:integration": "set NODE_ENV=test&& nyc --reporter=html --reporters=text mocha --opts ./integration_test/mocha.opts -r ts-node/register --exit"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -41,6 +41,7 @@
     "@types/node": "^8.9.5",
     "@types/passport": "^1.0.1",
     "@types/passport-jwt": "^3.0.3",
+    "@types/supertest": "^2.0.8",
     "@types/uuid": "^3.4.6",
     "chai": "^4.2.0",
     "mocha": "^6.2.2",
@@ -51,5 +52,4 @@
     "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
   }
-
 }

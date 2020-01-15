@@ -19,7 +19,7 @@ import config from "config";
 import cors from "cors";
 import bodyParser from "body-parser";
 import fileUploader from "express-fileupload";
-
+import router from "./app/router";
 const app: Express = express();
 const port: number = config.get("port") || 9000;
 //middleware
@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(fileUploader());
+router(app);
 app.listen(port, () => {
   console.log(`${config.get("name")} running on port: ${port}`);
 });
