@@ -13,7 +13,7 @@ export class JwtServiceImpl implements JwtService {
       faculty: $user.facultyName,
       level: $user.level,
       name: $user.name,
-      ref: $user.refNo,
+      ref: $user.ref,
       role: $user.role,
       username: $user.username
     };

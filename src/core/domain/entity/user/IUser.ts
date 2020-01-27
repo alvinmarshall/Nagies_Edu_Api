@@ -2,7 +2,7 @@ import { USER_ROLE } from "../../../../app/common/constants";
 
 export interface IUser {
   id: number | string;
-  refNo: string;
+  ref: string;
   name: string;
   age: number;
   dob: string;

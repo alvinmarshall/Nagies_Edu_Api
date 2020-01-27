@@ -14,7 +14,7 @@ router.get(
   "/profile",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    controller.getParentProfile(req, res);
+    controller.getUserProfile(req, res);
   }
 );
 

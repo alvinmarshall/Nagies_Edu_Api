@@ -7,6 +7,7 @@ import { DataSource } from "../../source/DataSource";
 import { DataSourceImpl } from "../../source/DataSourceImpl";
 import { GetUserParams } from "../../../domain/entity/user/GetUserParams";
 import { IParentEntity } from "../../../domain/entity/user/parent/IParentEntity";
+import { ITeacherEntity } from "../../../domain/entity/user/teacher/ITeacherEntity";
 
 @injectable()
 export class UserRepositoryImpl implements BaseSource, UserRepository {
@@ -27,7 +28,10 @@ export class UserRepositoryImpl implements BaseSource, UserRepository {
   getUsers(params: GetUserParams): Promise<IUser[]> {
     return this.dataSource.getUsers(params);
   }
-  getParent(identifier:string): Promise<IParentEntity[]> {
-    return this.dataSource.getParent(identifier)
+  getParent(identifier: string): Promise<IParentEntity[]> {
+    return this.dataSource.getParent(identifier);
+  }
+  getTeacher(identifier: string): Promise<ITeacherEntity[]> {
+    return this.dataSource.getTeacher(identifier);
   }
 }

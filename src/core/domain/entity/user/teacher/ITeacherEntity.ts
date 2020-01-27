@@ -1,7 +1,6 @@
 import { IUser } from "../IUser";
 
-export interface iTeacherEntity extends IUser {
+export interface ITeacherEntity extends IUser {
   contact: string;
-  facultyName:string;
-  uid:string;
+  uid: string;
 }

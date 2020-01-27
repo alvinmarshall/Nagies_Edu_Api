@@ -11,15 +11,33 @@ import {
 } from "../../../../app/common/constants";
 import { GetUserParams } from "../../../domain/entity/user/GetUserParams";
 import { IParentEntity } from "../../../domain/entity/user/parent/IParentEntity";
+import { ITeacherEntity } from "../../../domain/entity/user/teacher/ITeacherEntity";
 
 @injectable()
 export class UserDaoImpl implements UserDao {
   private context: BaseContext;
-
+  
   constructor(@inject(RemoteSource) $context: BaseContext) {
     this.context = $context;
   }
-
+  
+  getTeacher(identifier: string): Promise<ITeacherEntity[]> {
+    const sql = `
+      SELECT 
+        id AS uid,
+        Teachers_No , 
+        Teachers_Name, 
+        Dob AS dob,
+        Gender AS gender,
+        Contact AS contact, 
+        Admin_Date AS admissionDate, 
+        Faculty_Name AS facultyName, 
+        Level_Name AS level,
+        Username AS username, 
+        Image AS imageUrl
+      FROM ${TABLE_TEACHER} WHERE id = ?`;
+    return this.context.query(sql,[identifier])
+  }
   getParent(identifier:string): Promise<IParentEntity[]> {
     const sql = `
       SELECT 

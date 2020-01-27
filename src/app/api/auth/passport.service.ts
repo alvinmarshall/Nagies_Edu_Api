@@ -6,7 +6,6 @@ import config from "config";
 import { IPayload } from "../model/IPayload";
 import { GetUserParams } from "../../../core/domain/entity/user/GetUserParams";
 import isEmpty from "lodash/isEmpty";
-import { USER_ROLE } from "../../common/constants";
 
 @injectable()
 class PassportService {
@@ -28,7 +27,7 @@ class PassportService {
           identifier: payload.id
         };
         const data = await this.userService.getUser(params);
-        
+        data.role = params.role
         if (isEmpty(data)) {
           return done(null, false);
         }

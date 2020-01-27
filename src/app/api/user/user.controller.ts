@@ -3,6 +3,7 @@ import { inject, injectable } from "inversify";
 import { Request, Response } from "express";
 import { USER_TYPE, USER_ROLE } from "../../common/constants";
 import { ICredentials } from "../../../core/domain/entity/user/ICredentials";
+import { GetUserParams } from "../../../core/domain/entity/user/GetUserParams";
 
 @injectable()
 export class UserController {
@@ -14,12 +15,18 @@ export class UserController {
     this.userService = $userService;
   }
 
-  async getParentProfile(req: Request, res: Response) {
+  async getUserProfile(req: Request, res: Response) {
     try {
       //@ts-ignore
-      const { id } = req.user;
-      const data = await this.userService.getParentProfile(id);
-      return res.send({ studentProfile: data, status: 200 });
+      const { id, role } = req.user;
+      const params: GetUserParams = { role: role, identifier: id };
+      const data = await this.userService.getUserProfile(params);
+      if (role === USER_ROLE.PARENT) {
+        return res.send({ studentProfile: data, status: 200 });
+      }
+      if (role === USER_ROLE.TEACHER) {
+        return res.send({ teacherProfile: data, status: 200 });
+      }
     } catch (error) {
       console.error(error);
       return res
