@@ -10,6 +10,7 @@ import {
   TABLE_TEACHER
 } from "../../../../app/common/constants";
 import { GetUserParams } from "../../../domain/entity/user/GetUserParams";
+import { IParentEntity } from "../../../domain/entity/user/parent/IParentEntity";
 
 @injectable()
 export class UserDaoImpl implements UserDao {
@@ -18,7 +19,29 @@ export class UserDaoImpl implements UserDao {
   constructor(@inject(RemoteSource) $context: BaseContext) {
     this.context = $context;
   }
-  
+
+  getParent(identifier:string): Promise<IParentEntity[]> {
+    const sql = `
+      SELECT 
+          id,
+          Students_No AS studentNo,
+          Level_Name AS level,
+          Students_Name AS studentName,
+          Index_No AS 'index',
+          Image AS imageUrl,
+          Faculty_Name AS faculty,
+          Dob AS dob,
+          Gender AS gender,
+          Admin_Date AS admissionDate,
+          Section_Name AS section,
+          Semester_Name AS semester,
+          Guardian_Name AS guardian,
+          Guardian_No AS contact
+
+      FROM ${TABLE_STUDENT} WHERE id = ? LIMIT 1`;
+    return this.context.query(sql,[identifier])
+  }
+
   getUsers(params: GetUserParams): Promise<IUser[]> {
     const sql = this.getUserSql(params.role);
     return this.context.query(sql, [params.identifier || ""]);

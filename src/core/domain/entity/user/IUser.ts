@@ -10,8 +10,9 @@ export interface IUser {
   facultyName: string;
   password: string;
   imageUrl?: string;
-  adminDate: string;
+  admissionDate: string;
   level: string;
   username: string;
   role: USER_ROLE;
+  contact:string;
 }

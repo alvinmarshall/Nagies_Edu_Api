@@ -5,6 +5,7 @@ import { UserDao } from "../dao/user/UserDao";
 import { injectable, inject } from "inversify";
 import { UserDaoImpl } from "../dao/user/UserDaoImpl";
 import { GetUserParams } from "../../domain/entity/user/GetUserParams";
+import { IParentEntity } from "../../domain/entity/user/parent/IParentEntity";
 
 @injectable()
 export class DataSourceImpl implements DataSource {
@@ -22,6 +23,9 @@ export class DataSourceImpl implements DataSource {
     return this.userDao.getUserWithCredentials(credentials);
   }
   getUsers(params: GetUserParams): Promise<IUser[]> {
-    return this.userDao.getUsers(params)
+    return this.userDao.getUsers(params);
+  }
+  getParent(identifier:string): Promise<IParentEntity[]> {
+    return this.userDao.getParent(identifier)
   }
 }

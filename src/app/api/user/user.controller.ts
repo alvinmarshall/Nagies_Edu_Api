@@ -14,6 +14,20 @@ export class UserController {
     this.userService = $userService;
   }
 
+  async getParentProfile(req: Request, res: Response) {
+    try {
+      //@ts-ignore
+      const { id } = req.user;
+      const data = await this.userService.getParentProfile(id);
+      return res.send({ studentProfile: data, status: 200 });
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .send({ message: "Something went wrong, try again" });
+    }
+  }
+
   async authenticateUser(req: Request, res: Response) {
     try {
       const { role } = req.query;

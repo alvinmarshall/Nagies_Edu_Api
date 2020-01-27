@@ -10,6 +10,7 @@ import { DataSourceImpl } from "../../core/data/source/DataSourceImpl";
 import { JwtServiceImpl } from "../api/auth/JwtServiceImpl";
 import PassportService from "../api/auth/passport.service";
 import { GetUsersTask } from "../../core/domain/usecase/user/GetUsersTask";
+import { GetParentProfileTask } from "../../core/domain/usecase/user/GetParentProfileTask";
 
 let DIContainer = new Container();
 
@@ -47,5 +48,6 @@ DIContainer.bind<RemoteSource>(RemoteSource).toConstantValue(
 //
 DIContainer.bind<GetUsersTask>(GetUsersTask).toSelf();
 DIContainer.bind<GetAuthenticationTask>(GetAuthenticationTask).toSelf();
+DIContainer.bind<GetParentProfileTask>(GetParentProfileTask).toSelf()
 
 export default DIContainer;

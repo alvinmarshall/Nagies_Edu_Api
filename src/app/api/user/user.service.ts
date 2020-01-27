@@ -6,21 +6,26 @@ import { JwtService } from "../auth/JwtService";
 import { JwtServiceImpl } from "../auth/JwtServiceImpl";
 import { GetUsersTask } from "../../../core/domain/usecase/user/GetUsersTask";
 import { GetUserParams } from "../../../core/domain/entity/user/GetUserParams";
+import { GetParentProfileTask } from "../../../core/domain/usecase/user/GetParentProfileTask";
+import { IParentEntity } from "../../../core/domain/entity/user/parent/IParentEntity";
 
 @injectable()
 export class UserService {
   private getAuthTask: GetAuthenticationTask;
   private jwtService: JwtService;
   private getUsersTask: GetUsersTask;
+  private getParentProfileTask: GetParentProfileTask;
 
   constructor(
     @inject(GetAuthenticationTask) $getAuthTask: GetAuthenticationTask,
     @inject(JwtServiceImpl) $jwtService: JwtService,
-    @inject(GetUsersTask) $getUsersTask: GetUsersTask
+    @inject(GetUsersTask) $getUsersTask: GetUsersTask,
+    @inject(GetParentProfileTask) $getParentProfileTask: GetParentProfileTask
   ) {
     this.getAuthTask = $getAuthTask;
     this.jwtService = $jwtService;
     this.getUsersTask = $getUsersTask;
+    this.getParentProfileTask = $getParentProfileTask;
   }
 
   authenticateUser(credentials: ICredentials): Promise<any> {
@@ -29,7 +34,7 @@ export class UserService {
         const data = await this.getAuthTask.buildUseCase(credentials);
         if (data.length === 0) return resolve(null);
         const user = data[0];
-        user.role = credentials.role
+        user.role = credentials.role;
         const token = this.jwtService.generateToken(user);
         const userInfo = {
           uuid: user.id,
@@ -48,5 +53,9 @@ export class UserService {
 
   getUser(params: GetUserParams): Promise<IUser> {
     return this.getUsersTask.buildUseCase(params).then(data => data[0]);
+  }
+
+  getParentProfile(identifier: string): Promise<IParentEntity> {
+    return this.getParentProfileTask.buildUseCase(identifier).then(data => data[0]);
   }
 }

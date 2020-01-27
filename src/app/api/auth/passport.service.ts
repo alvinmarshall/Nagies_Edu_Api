@@ -6,6 +6,7 @@ import config from "config";
 import { IPayload } from "../model/IPayload";
 import { GetUserParams } from "../../../core/domain/entity/user/GetUserParams";
 import isEmpty from "lodash/isEmpty";
+import { USER_ROLE } from "../../common/constants";
 
 @injectable()
 class PassportService {
