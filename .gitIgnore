@@ -4,3 +4,5 @@ config/production.json
 config/test.json
 coverage
 .nyc_output
+mysql/init_db.sql
+db/CreateTables.sql

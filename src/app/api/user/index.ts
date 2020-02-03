@@ -6,7 +6,7 @@ import passport from "passport";
 const router = express.Router();
 const controller = DIContainer.resolve<UserController>(UserController);
 
-router.post("/login", (req, res) => {
+router.post("/", (req, res) => {
   controller.authenticateUser(req, res);
 });
 

@@ -34,7 +34,7 @@ app.use(fileUploader());
 router(app);
 passService.init();
 app.listen(port, () => {
-  console.log(`${config.get("name")} running on port: ${port}`);
+  console.log(`${config.get("name")} running hey on port: ${port}`);
 });
 
 export default app;

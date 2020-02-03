@@ -7,13 +7,29 @@ import { UserDaoImpl } from "../dao/user/UserDaoImpl";
 import { GetUserParams } from "../../domain/entity/user/GetUserParams";
 import { IParentEntity } from "../../domain/entity/user/parent/IParentEntity";
 import { ITeacherEntity } from "../../domain/entity/user/teacher/ITeacherEntity";
+import { IMessage } from "../../domain/entity/message/IMessage";
+import MessageDao from "../dao/message/MessageDao";
+import MessageDaoImpl from "../dao/message/MessageDaoImpl";
 
 @injectable()
 export class DataSourceImpl implements DataSource {
   private userDao: UserDao;
+  private messageDao: MessageDao;
 
-  constructor(@inject(UserDaoImpl) $userDao: UserDao) {
+  constructor(@inject(UserDaoImpl) $userDao: UserDao,@inject(MessageDaoImpl) $messageDao: MessageDao) {
     this.userDao = $userDao;
+    this.messageDao = $messageDao;
+  }
+  
+  //
+  // ─── MESSAGE ────────────────────────────────────────────────────────────────────
+  //
+
+  getParentMessage(
+    level: string,
+    identifier?: string | undefined
+  ): Promise<IMessage[]> {
+    return this.messageDao.getParentMessage(level, identifier);
   }
 
   //

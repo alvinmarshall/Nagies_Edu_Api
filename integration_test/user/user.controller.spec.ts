@@ -8,10 +8,10 @@ import { USER_ROLE } from "../../src/app/common/constants";
 let token_parent = "";
 let token_teacher = "";
 describe("controller.user UserController Test", () => {
-  it("POST /users/login?role=parent success", async () => {
+  it("POST /users?role=parent success", async () => {
     const credentials = TestUserGenerator.parent();
     const res = await agent(app)
-      .post("/users/login")
+      .post("/users")
       .query({ role: "parent" })
       .send(credentials)
       .expect(200);
@@ -20,10 +20,10 @@ describe("controller.user UserController Test", () => {
     // console.log("res", res.body);
   });
 
-  it("POST /users/login?role=teacher success", async () => {
+  it("POST /users?role=teacher success", async () => {
     const credentials = TestUserGenerator.teacher();
     const res = await agent(app)
-      .post("/users/login")
+      .post("/users")
       .query({ role: "teacher" })
       .send(credentials)
       .expect(200);
@@ -32,14 +32,14 @@ describe("controller.user UserController Test", () => {
     // console.log("res", res.body);
   });
 
-  it("POST /users/login?role=parent failed", async () => {
+  it("POST /users?role=parent failed", async () => {
     const credentials: ICredentials = {
       password: "unknown",
       role: USER_ROLE.PARENT,
       username: "unknown"
     };
     const res = await agent(app)
-      .post("/users/login")
+      .post("/users")
       .query({ role: "teacher" })
       .send(credentials)
       .expect(401);
